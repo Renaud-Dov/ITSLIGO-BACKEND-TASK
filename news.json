@@ -1,16 +1,16 @@
 [
   {
-    "title": "News 0",
-    "description": "This is news 0",
+    "title": "CheckStudents",
+    "description": "CheckStudent is Discord bot written in Python to take the attendance in class used in several servers around the world.",
     "id": 0,
-    "image": "https://picsum.photos/id/0/500/300.jpg",
+    "image": "https://github.com/Renaud-Dov/websiteV2/blob/master/src/img/checkstudents.jpg?raw=true",
     "content": "https://raw.githubusercontent.com/Renaud-Dov/CheckStudents/master/README.md"
   },
   {
-    "title": "News 1",
-    "description": "This is news 1",
+    "title": "Test Markdown",
+    "description": "This post is just to test markdown syntax.",
     "id": 1,
-    "image": "https://picsum.photos/id/1/500/300.jpg",
+    "image": "https://www.markdownguide.org/assets/images/markdown-guide-og.jpg ",
     "content": "https://gist.githubusercontent.com/Renaud-Dov/44eca9d20a06c1361bb349c0e7a529b0/raw/aa793bbda73fdc538c1438796f489d486477dfd4/md-example"
   },
   {

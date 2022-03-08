@@ -7,7 +7,14 @@ const MarkdownIt = require('markdown-it');
 const news = require('../news.json');
 
 router.get("/", (req, res) => {
-    res.render("home", {news:news});
+    let lastViewed = undefined;
+    if (req.signedCookies.lastViewed) {
+        lastViewed = [];
+        req.signedCookies.lastViewed.forEach(function(item) {
+            lastViewed.push(news[item]);
+        });
+    }
+    res.render("home", {news: news, lastViewed: lastViewed});
 });
 
 router.get("/blog/:idPost", (req, res) => {
@@ -19,11 +26,33 @@ router.get("/blog/:idPost", (req, res) => {
     //     res.render("blog", {newsItem:newsItem});
     // }
     fetch(newsItem.content).then(response => response.text()).then(md => {
-        md_it = new MarkdownIt();
+        let md_it = new MarkdownIt();
         const html = md_it.render(md);
+        let lastViewed = [];
+        if (req.signedCookies.lastViewed) {
+            lastViewed = req.signedCookies.lastViewed.slice(-2);
+        }
+        lastViewed.push(id);
+        res.cookie('lastViewed', lastViewed, {signed: true});
 
-        res.render("blog", {newsItem:newsItem, md:html});
+        res.render("blog", {newsItem: newsItem, md: html});
     });
+});
+
+router.get("/about", (req, res) => {
+    res.render("about");
+});
+
+router.get("/contact", (req, res) => {
+    res.render("contact");
+});
+
+router.post("/contact", (req, res) => {
+    console.log("test");
+    const name = req.body.name;
+    const email = req.body.email;
+    const message = req.body.message;
+    res.render("contact", {name: name, email: email, message: message});
 });
 
 module.exports = router;
