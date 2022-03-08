@@ -1,8 +1,8 @@
-<div class="min-h-screen bg-gray-50 py-8 flex flex-col justify-center relative overflow-hidden lg:py-12">
+<div class="min-h-screen bg-gray-100 py-8 flex flex-col justify-center relative overflow-hidden lg:py-12">
     <div class="flex flex-col gap-5 m-4">
         {{#if lastViewed}}
 
-            <div class="relative w-full px-6 pb-12  shadow-xl shadow-slate-700/10 ring-1 ring-gray-900/5 lg:max-w-[95%] md:mx-auto">
+            <div class="relative w-full px-6 pb-12  bg-gray-50 shadow-xl shadow-slate-700/10 ring-1 ring-gray-900/5 lg:max-w-[95%] md:mx-auto">
                 <h1 class="text-4xl m-5">Latest posts read</h1>
                 <div class="flex flex-wrap mx-auto gap-4 justify-center">
                     {{#each lastViewed}}
@@ -12,7 +12,7 @@
                 </div>
             </div>
         {{/if}}
-        <div class="relative w-full px-6 py-6  shadow-xl shadow-slate-700/10 ring-1 ring-gray-900/5 lg:max-w-[95%] md:mx-auto  ">
+        <div class="relative w-full px-6 py-6 bg-gray-50  shadow-xl shadow-slate-700/10 ring-1 ring-gray-900/5 lg:max-w-[95%] md:mx-auto  ">
             <h1 class="text-4xl m-5">Latest posts</h1>
             <div class="flex flex-wrap mx-auto gap-4 justify-center">
                 {{#each news}}
