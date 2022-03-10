@@ -1,5 +1,6 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const algoliasearch = require('algoliasearch');
 const home = require('./routes/home');
 const app = express();
 const handlebars = require('express-handlebars').create({defaultLayout: 'main'});
@@ -10,7 +11,12 @@ app.engine('handlebars', handlebars.engine);
 app.set('view engine', "handlebars")
 app.use(express.urlencoded({ extended: true }))
 
+const client = algoliasearch('RA145A6L8O', '4344303a31c94f8220529b58045196c1');
+const index = client.initIndex('new-index-1646933713');
+
 app.use('/', home);
+
+
 
 // custom 400 page
 app.use((req, res) => {
