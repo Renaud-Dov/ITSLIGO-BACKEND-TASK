@@ -1,18 +1,46 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const algoliasearch = require('algoliasearch');
 const home = require('./routes/home');
+const session = require('express-session');
+const mongoose = require('mongoose');
 const app = express();
 const handlebars = require('express-handlebars').create({defaultLayout: 'main'});
 app.use(express.static('public'));
-app.use(cookieParser("a secret is a secret"));
+const config = require('./config.json');
+app.use(cookieParser(config.cookieSecret));
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', "handlebars")
+
 app.use(express.urlencoded({ extended: true }))
 
-const client = algoliasearch('RA145A6L8O', '4344303a31c94f8220529b58045196c1');
-const index = client.initIndex('new-index-1646933713');
+
+app.use(session(
+    {secret: config.sessionSecret,
+        cookie: { maxage: 6000},
+        resave: false,
+        saveUninitialized: false
+    }))
+
+
+const connectionString = 'mongodb://127.0.0.1:27017/project';
+mongoose.connect(connectionString, {
+    "useNewUrlParser": true,
+    "useUnifiedTopology": true
+}).
+catch ( error => {
+    console.log('Database connection refused' + error);
+    process.exit(2);
+})
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+
+db.once('open', () => {
+    console.log("DB connected")
+});
+
 
 app.use('/', home);
 
